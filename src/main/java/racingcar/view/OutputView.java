@@ -1,7 +1,5 @@
 package racingcar.view;
 
-import racingcar.domain.Car;
-
 import java.util.List;
 
 public class OutputView {
@@ -15,18 +13,14 @@ public class OutputView {
         System.out.println(RESULT_HEADER);
     }
 
-    public static void printRoundResult(List<Car> cars) {
-        cars.forEach(car -> {
-            System.out.println(car.getName() + NAME_POSITION_DELIMITER + generatePositionIndicator(car.getPosition()));
-        });
+    public static void printRoundResult(List<String> carNames, List<Integer> positions) {
+        for (int i = 0; i < carNames.size(); i++) {
+            System.out.println(carNames.get(i) + NAME_POSITION_DELIMITER + generatePositionIndicator(positions.get(i)));
+        }
         System.out.println();
     }
 
-    public static void printWinners(List<Car> winners) {
-        List<String> winnerNames = winners.stream()
-                .map(Car::getName)
-                .toList();
-
+    public static void printWinners(List<String> winnerNames) {
         System.out.println(WINNER_PREFIX + String.join(WINNER_DELIMITER, winnerNames));
     }
 

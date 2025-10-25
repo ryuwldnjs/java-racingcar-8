@@ -3,11 +3,9 @@ package racingcar.view;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.Car;
 
 import java.util.List;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,60 +26,48 @@ class OutputViewTest extends NsTest {
     @DisplayName("라운드 결과를 출력한다")
     @Test
     void printRoundResult() {
-        assertRandomNumberInRangeTest(
-                () -> {
-                    run("");
-                    Car car1 = new Car("pobi");
-                    Car car2 = new Car("woni");
-                    car1.move();
-                    car2.move();
+        assertSimpleTest(() -> {
+            // given
+            List<String> carNames = List.of("pobi", "woni");
+            List<Integer> positions = List.of(1, 0);
 
-                    // when
-                    OutputView.printRoundResult(List.of(car1, car2));
+            // when
+            OutputView.printRoundResult(carNames, positions);
 
-                    // then
-                    assertThat(output()).contains("pobi : -");
-                    assertThat(output()).contains("woni :");
-                    assertThat(output()).doesNotContain("woni : -");
-                },
-                4, 3
-        );
+            // then
+            assertThat(output()).contains("pobi : -");
+            assertThat(output()).contains("woni :");
+            assertThat(output()).doesNotContain("woni : -");
+        });
     }
 
     @DisplayName("여러 자동차의 라운드 결과를 출력한다")
     @Test
     void printRoundResultWithMultipleCars() {
-        assertRandomNumberInRangeTest(
-                () -> {
-                    run("");
-                    Car car1 = new Car("pobi");
-                    Car car2 = new Car("woni");
-                    Car car3 = new Car("jun");
-                    car1.move();
-                    car1.move();
-                    car2.move();
+        assertSimpleTest(() -> {
+            // given
+            List<String> carNames = List.of("pobi", "woni", "jun");
+            List<Integer> positions = List.of(2, 1, 0);
 
-                    // when
-                    OutputView.printRoundResult(List.of(car1, car2, car3));
+            // when
+            OutputView.printRoundResult(carNames, positions);
 
-                    // then
-                    assertThat(output()).contains("pobi : --");
-                    assertThat(output()).contains("woni : -");
-                    assertThat(output()).contains("jun :");
-                },
-                4, 5, 4, 3
-        );
+            // then
+            assertThat(output()).contains("pobi : --");
+            assertThat(output()).contains("woni : -");
+            assertThat(output()).contains("jun :");
+        });
     }
 
     @DisplayName("우승자를 출력한다 - 단독 우승")
     @Test
     void printWinners_Single() {
         assertSimpleTest(() -> {
-            run("");
-            Car winner = new Car("pobi");
+            // given
+            List<String> winnerNames = List.of("pobi");
 
             // when
-            OutputView.printWinners(List.of(winner));
+            OutputView.printWinners(winnerNames);
 
             // then
             assertThat(output()).contains("최종 우승자 : pobi");
@@ -92,12 +78,11 @@ class OutputViewTest extends NsTest {
     @Test
     void printWinners_Multiple() {
         assertSimpleTest(() -> {
-            run("");
-            Car winner1 = new Car("pobi");
-            Car winner2 = new Car("jun");
+            // given
+            List<String> winnerNames = List.of("pobi", "jun");
 
             // when
-            OutputView.printWinners(List.of(winner1, winner2));
+            OutputView.printWinners(winnerNames);
 
             // then
             assertThat(output()).contains("최종 우승자 : pobi, jun");
@@ -108,15 +93,32 @@ class OutputViewTest extends NsTest {
     @Test
     void printRoundResult_NoPosition() {
         assertSimpleTest(() -> {
-            run("");
-            Car car = new Car("pobi");
+            // given
+            List<String> carNames = List.of("pobi");
+            List<Integer> positions = List.of(0);
 
             // when
-            OutputView.printRoundResult(List.of(car));
+            OutputView.printRoundResult(carNames, positions);
 
             // then
             assertThat(output()).contains("pobi :");
             assertThat(output()).doesNotContain("pobi : -");
+        });
+    }
+
+    @DisplayName("위치에 따라 정확한 개수의 하이픈을 출력한다")
+    @Test
+    void printRoundResult_PositionIndicator() {
+        assertSimpleTest(() -> {
+            // given
+            List<String> carNames = List.of("pobi");
+            List<Integer> positions = List.of(5);
+
+            // when
+            OutputView.printRoundResult(carNames, positions);
+
+            // then
+            assertThat(output()).contains("pobi : -----");
         });
     }
 
