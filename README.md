@@ -80,11 +80,11 @@ racingcar/
 │   ├── Car.java              # 자동차 도메인 모델
 │   └── RaceGame.java         # 단일 경주 게임 로직
 ├── util/
-│   └── InputParser.java   # 입력 파싱
+│   └── InputParser.java      # 입력 파싱
 ├── view/
 │   ├── InputView.java        # 사용자 입력
 │   └── OutputView.java       # 결과 출력
-├── GameRunner.java           # 경주 게임 실행 통합 및 입력값 검증
+├── RaceGameRunner.java       # 경주 게임 실행 통합 및 입력값 검증
 └── Application.java          # 메인 실행
 ```
 
