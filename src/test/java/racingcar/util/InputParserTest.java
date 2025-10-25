@@ -51,4 +51,39 @@ class InputParserTest {
         assertThat(result).containsExactly("pobi");
     }
 
+    @DisplayName("시도 횟수를 정수로 파싱한다")
+    @Test
+    void parseRounds() {
+        // given
+        String input = "5";
+
+        // when
+        int result = InputParser.parseRounds(input);
+
+        // then
+        assertThat(result).isEqualTo(5);
+    }
+
+    @DisplayName("시도 횟수의 공백을 제거하고 파싱한다")
+    @Test
+    void parseRounds_WithSpaces() {
+        // given
+        String input = "  5  ";
+
+        // when
+        int result = InputParser.parseRounds(input);
+
+        // then
+        assertThat(result).isEqualTo(5);
+    }
+
+    @DisplayName("시도 횟수가 숫자가 아니면 예외가 발생한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "1.5", "일", ""})
+    void parseRounds_WithInvalidInput(String input) {
+        // given & when & then
+        assertThatThrownBy(() -> InputParser.parseRounds(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자");
+    }
 }

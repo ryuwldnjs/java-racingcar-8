@@ -12,4 +12,11 @@ public class InputParser {
                 .toList();
     }
 
+    public static int parseRounds(String input) {
+        try {
+            return Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다.");
+        }
+    }
 }
