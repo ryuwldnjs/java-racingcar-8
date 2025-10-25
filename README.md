@@ -80,11 +80,11 @@ racingcar/
 │   ├── Car.java              # 자동차 도메인 모델
 │   └── RaceGame.java         # 단일 경주 게임 로직
 ├── util/
-│   └── InputValidator.java   # 입력 파싱 및 검증
+│   └── InputParser.java   # 입력 파싱
 ├── view/
 │   ├── InputView.java        # 사용자 입력
 │   └── OutputView.java       # 결과 출력
-├── GameRunner.java           # 경주 게임 실행 통합
+├── GameRunner.java           # 경주 게임 실행 통합 및 입력값 검증
 └── Application.java          # 메인 실행
 ```
 
@@ -95,15 +95,13 @@ racingcar/
 - [X] 현재 위치 관리
 - [X] 무작위 값(0~9) 생성 후 4 이상이면 전진
 
-### 2. RaceGame 경주 게임 로직
+### 2. RaceGame 경주 게임(1 round) 로직
 - [ ] 여러 자동차 관리 (List<Car>)
 - [ ] 한 라운드 진행 (모든 자동차 이동)
-- [ ] 우승자 판정 (최대 위치의 자동차들)
 
-### 3. 입력 검증 유틸리티
+### 3. 입력 파싱 유틸리티
 - [ ] 쉼표 구분 자동차 이름 파싱
-- [ ] 빈 값 입력 시 `IllegalArgumentException` 발생
-- [ ] 시도 횟수 검증 (숫자, 양수)
+- [ ] 시도 횟수 숫자 파싱
 
 ### 4. View 레이어
 - [ ] 자동차 이름 입력받기
@@ -112,6 +110,8 @@ racingcar/
 - [ ] 각 라운드 결과 출력 (이름 : ---)
 - [ ] 최종 우승자 출력 (쉼표 구분)
 
-### 5. 게임 실행 통합
+### 5. RaceGameRunner
 - [ ] GameRunner로 게임 실행 흐름 제어
-- [ ] Application 진입점 구현
+- [ ] 사용자 입력값(라운드 수) 검증
+- [ ] RaceGame 인스턴스 생성 및 round단위 실행
+- [ ] 우승자 판정 (최대 위치의 자동차들)
