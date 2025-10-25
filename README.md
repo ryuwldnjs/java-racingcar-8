@@ -111,6 +111,6 @@ racingcar/
 
 ### 5. RaceGameRunner
 - GameRunner로 게임 실행 흐름 제어
-- [ ] 사용자 입력값(라운드 수) 검증
+- [x] 사용자 입력값(라운드 수) 검증
 - [X] RaceGame 인스턴스 생성 및 round단위 실행
 - [ ] 우승자 판정 (최대 위치의 자동차들)

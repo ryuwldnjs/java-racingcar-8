@@ -12,6 +12,9 @@ public class RaceGameRunner {
     public static void run() {
         List<String> carNames = InputParser.parseCarNames(InputView.readCarNames());
         int rounds = InputParser.parseRounds(InputView.readRounds());
+        if (rounds <= 0) {
+            throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
+        }
 
         List<Car> cars = carNames.stream().map(Car::new).toList();
         RaceGame raceGame = new RaceGame(cars);
