@@ -20,6 +20,7 @@ public class RaceGameRunner {
         RaceGame raceGame = new RaceGame(cars);
 
         playRace(raceGame, cars, rounds);
+        printWinners(cars);
     }
 
     private static void playRace(RaceGame raceGame, List<Car> cars, int rounds) {
@@ -33,4 +34,17 @@ public class RaceGameRunner {
         }
     }
 
+    private static void printWinners(List<Car> cars) {
+        int maxPosition = cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
+
+        List<String> winners = cars.stream()
+                .filter(car -> car.getPosition() == maxPosition)
+                .map(Car::getName)
+                .toList();
+
+        OutputView.printWinners(winners);
+    }
 }
