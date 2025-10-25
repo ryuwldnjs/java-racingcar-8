@@ -73,6 +73,36 @@ class OutputViewTest extends NsTest {
         );
     }
 
+    @DisplayName("우승자를 출력한다 - 단독 우승")
+    @Test
+    void printWinners_Single() {
+        assertSimpleTest(() -> {
+            run("");
+            Car winner = new Car("pobi");
+
+            // when
+            OutputView.printWinners(List.of(winner));
+
+            // then
+            assertThat(output()).contains("최종 우승자 : pobi");
+        });
+    }
+
+    @DisplayName("우승자를 출력한다 - 공동 우승")
+    @Test
+    void printWinners_Multiple() {
+        assertSimpleTest(() -> {
+            run("");
+            Car winner1 = new Car("pobi");
+            Car winner2 = new Car("jun");
+
+            // when
+            OutputView.printWinners(List.of(winner1, winner2));
+
+            // then
+            assertThat(output()).contains("최종 우승자 : pobi, jun");
+        });
+    }
 
     @DisplayName("위치가 0인 자동차는 이동 표시가 없다")
     @Test
