@@ -10,6 +10,9 @@ public class RaceGame {
         this.cars = new ArrayList<>(cars);
     }
 
+    public void playRound() {
+        cars.forEach(Car::move);
+    }
 
     public List<Car> getCars() {
         return new ArrayList<>(cars);
