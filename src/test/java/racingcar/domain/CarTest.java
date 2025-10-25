@@ -57,4 +57,13 @@ class CarTest {
                 .hasMessageContaining("빈 값");
     }
 
+    @DisplayName("자동차의 초기 위치는 0이다")
+    @Test
+    void initialPosition() {
+        // given & when
+        Car car = new Car("pobi");
+
+        // then
+        assertThat(car.getPosition()).isEqualTo(0);
+    }
 }
