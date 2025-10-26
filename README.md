@@ -78,13 +78,14 @@ jun : -----
 racingcar/
 ├── domain/
 │   ├── Car.java              # 자동차 도메인 모델
-│   └── RaceGame.java         # 단일 경주 게임 로직
+│   ├── RaceGame.java         # 경주 게임 로직
+│   └── Rounds.java           # 라운드 수 도메인 모델
 ├── util/
 │   └── InputParser.java      # 입력 파싱
 ├── view/
 │   ├── InputView.java        # 사용자 입력
 │   └── OutputView.java       # 결과 출력
-├── RaceGameRunner.java       # 경주 게임 실행 통합 및 입력값 검증
+├── RaceGameRunner.java       # 경주 게임 실행 흐름 제어
 └── Application.java          # 메인 실행
 ```
 
@@ -95,22 +96,28 @@ racingcar/
 - [X] 현재 위치 관리
 - [X] 무작위 값(0~9) 생성 후 4 이상이면 전진
 
-### 2. RaceGame 경주 게임(1 round) 로직
+### 2. RaceGame 경주 게임 로직 (일급 컬렉션)
 - [X] 여러 자동차 관리 (List<Car> 주입)
+- [X] 정적 팩토리 메서드로 자동차 이름 리스트에서 생성
 - [X] 한 라운드 진행 (모든 자동차 이동)
+- [X] 우승자 판정 (최대 위치의 자동차 이름 반환)
+- [X] 자동차 이름/위치 조회 메서드 제공
 
-### 3. 입력 파싱 유틸리티
+### 3. Rounds 도메인 모델
+- [X] 시도 횟수 값 저장 및 양수 검증
+- [X] Record 타입으로 불변성 보장
+
+### 4. 입력 파싱 유틸리티
 - [X] 쉼표 구분 자동차 이름 파싱
 - [X] 시도 횟수 숫자 파싱
 
-### 4. View 레이어
+### 5. View 레이어
 - [X] 자동차 이름과 시도 횟수 입력받기
 - [X] 실행 결과 헤더 출력
-- [x] 각 라운드 결과 출력 (이름 : ---)
-- [x] 최종 우승자 출력 (쉼표 구분)
+- [X] 각 라운드 결과 출력 (이름 : ---)
+- [X] 최종 우승자 출력 (쉼표 구분)
 
-### 5. RaceGameRunner
-- GameRunner로 게임 실행 흐름 제어
-- [x] 사용자 입력값(라운드 수) 검증
-- [X] RaceGame 인스턴스 생성 및 round단위 실행
-- [x] 우승자 판정 (최대 위치의 자동차들)
+### 6. RaceGameRunner
+- [X] 게임 실행 흐름 제어
+- [X] RaceGame 및 Rounds 인스턴스 생성
+- [X] round단위 실행 및 결과 출력
